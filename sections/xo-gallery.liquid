@@ -1,0 +1,22 @@
+{% assign xo_gallery = "xo_gallery_" | append: section.settings.gallery_id %}
+              {% include xo_gallery %}
+              {% schema %}
+                {
+                  "name": "XO Gallery",
+                  "settings": [
+                    {
+                      "type": "select",
+                      "id": "gallery_id",
+                      "label": "Gallery id",
+                      "default": "20",
+                      "options": [{"label":"test","value":"20"},{"label":"Test","value":"19"}]
+                    }
+                  ],
+                  "presets": [
+                      {
+                        "name": "XO Gallery",
+                        "category": "Image"
+                      }
+                    ]
+                }
+              {% endschema %}

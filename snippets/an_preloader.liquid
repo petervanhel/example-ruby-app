@@ -1,0 +1,47 @@
+<section class="an_preloader" id="an_preloader" style="display:block; position:fixed;width:100%;height:100%;background-color:#fff;z-index:9999">
+	<div class="an_preloader_inner" style="position:relative;width:100%;height:100%;">
+		<img src="https://tabme.anvanto.com/storage/anvanto/product_tabs/standard.gif" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);">
+	</div>
+	<script>
+        var fade = {
+            fade_in_from: 0,
+            fade_out_from: 10
+        }
+
+        var fadeOut = function(element) {
+            var target = document.getElementById(element);
+            var newSetting = fade.fade_out_from / 10;
+            target.style.opacity = newSetting;
+            fade.fade_out_from--;
+            if (fade.fade_out_from == 0) {
+                target.style.opacity = 0;
+                target.style.display = "none";
+
+                clearTimeout(loopTimer);
+
+                fade.fade_out_from = 10;
+                return false;
+            }
+
+            var loopTimer = setTimeout('fadeOut(\''+element+'\')', 50);
+        }
+        window.onload = function() {
+            var scriptTags = document.getElementsByTagName("script"),
+                script,
+                idx,
+				script_found = false;
+
+            for (idx = 0; idx < scriptTags.length; idx++) {
+                script = scriptTags.item(idx);
+                if (script.src && script.src.match(/anvanto\/product-tabs\/front\/js\/product-tabs\.js/)) {
+                    script_found = true;
+                }
+            }
+
+            if(!script_found){
+                console.log('product-tabs.js not found, please reinstall Product tabs app or delete snippets/an_preloader.liquid')
+                fadeOut('an_preloader');
+            }
+        };
+	</script>
+</section>
